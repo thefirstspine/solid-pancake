@@ -9,6 +9,7 @@ import { EventService } from './event/event.service';
 import { SessionService } from './session/session.service';
 import { Session } from './session/session.entity';
 import { Event } from './event/event.entity';
+import { SirupController } from './sirup/sirup.controller';
 
 @Module({
   imports: [
@@ -26,7 +27,8 @@ import { Event } from './event/event.entity';
   ],
   controllers: [
   ApiController,
-  IndexController],
+  IndexController,
+  SirupController],
   providers: [
     {provide: LogService, useValue: new LogService('arena')},
     ApiService,
