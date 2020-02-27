@@ -25,13 +25,13 @@ $ npm run start:prod
 
 ### Why? What?
 
-[Why Solid Pancake over Google Analytics?](docs/why.md)
-[Sessions & events concepts](docs/concepts.md)
+- [Why Solid Pancake over Google Analytics?](docs/why.md)
+- [Sessions & events concepts](docs/concepts.md)
 
 ### Tools & API
 
-[Tracking API](docs/api.md)
-[Sirup.js](docs/sirup.md)
+- [Tracking API](docs/api.md)
+- [Sirup.js](docs/sirup.md)
 
 ## License
 
