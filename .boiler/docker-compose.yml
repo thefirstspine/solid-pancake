@@ -2,7 +2,7 @@ version: "3.2"
 
 services:
   solid-pancake_postgres:
-    image: postgres:10
+    image: postgres:11
     container_name: thefirstspine_solid-pancake_postgres_container
     networks:
       default:
