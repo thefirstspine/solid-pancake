@@ -30,7 +30,7 @@ import { SirupController } from './sirup/sirup.controller';
   IndexController,
   SirupController],
   providers: [
-    {provide: LogService, useValue: new LogService('arena')},
+    {provide: LogService, useValue: new LogService('solid-pancake')},
     ApiService,
     EventService,
     SessionService,
