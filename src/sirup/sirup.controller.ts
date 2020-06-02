@@ -1,6 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
 import * as fs from 'fs';
-import env from '../@shared/env-shared/env';
 
 /**
  * Controller to get the Sirup.js toolkit.
@@ -15,7 +14,7 @@ export class SirupController {
   index() {
     let str = fs.readFileSync(`${__dirname}/../assets/sirup.js`).toString();
     const config = {
-      baseUrl: env.config.SOLID_PANCAKE_URL,
+      baseUrl: process.env.SOLID_PANCAKE_URL,
     };
     Object.keys(config).forEach((key: string) => {
       str = str.replace(`\{${key}\}`, config[key]);

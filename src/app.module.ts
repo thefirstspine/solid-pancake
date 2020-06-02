@@ -1,6 +1,5 @@
-import { Module } from '@nestjs/common';
+import { Module, DynamicModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import env from './@shared/env-shared/env';
 import { LogService } from './@shared/log-shared/log.service';
 import { ApiController } from './api/api.controller';
 import { IndexController } from './index/index.controller';
@@ -11,29 +10,36 @@ import { Session } from './session/session.entity';
 import { Event } from './event/event.entity';
 import { SirupController } from './sirup/sirup.controller';
 
-@Module({
-  imports: [
-    TypeOrmModule.forFeature([Session, Event]),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      synchronize: true,
-      entities: env.dist ? [__dirname + '/**/**.entity.js'] : [__dirname + '/**/**.entity{.ts,.js}'],
-      host: env.config.PG_HOST,
-      port: env.config.PG_PORT,
-      username: env.config.PG_USERNAME,
-      password: env.config.PG_PASSWORD,
-      database: env.config.PG_DATABASE,
-    }),
-  ],
-  controllers: [
-  ApiController,
-  IndexController,
-  SirupController],
-  providers: [
-    {provide: LogService, useValue: new LogService('solid-pancake')},
-    ApiService,
-    EventService,
-    SessionService,
-  ],
-})
-export class AppModule {}
+@Module({})
+export class AppModule {
+
+  public static register(): DynamicModule {
+    return {
+      module: AppModule,
+      imports: [
+        TypeOrmModule.forFeature([Session, Event]),
+        TypeOrmModule.forRoot({
+          type: 'postgres',
+          synchronize: true,
+          entities: [__dirname + '/**/**.entity{.ts,.js}'],
+          host: process.env.PG_HOST,
+          port: parseInt(process.env.PG_PORT, 10),
+          username: process.env.PG_USERNAME,
+          password: process.env.PG_PASSWORD,
+          database: process.env.PG_DATABASE,
+        }),
+      ],
+      controllers: [
+      ApiController,
+      IndexController,
+      SirupController],
+      providers: [
+        {provide: LogService, useValue: new LogService('solid-pancake')},
+        ApiService,
+        EventService,
+        SessionService,
+      ],
+    };
+  }
+
+}
