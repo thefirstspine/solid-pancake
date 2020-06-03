@@ -1,6 +1,5 @@
 import { Module, DynamicModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { LogService } from './@shared/log-shared/log.service';
 import { ApiController } from './api/api.controller';
 import { IndexController } from './index/index.controller';
 import { ApiService } from './api/api.service';
@@ -9,6 +8,7 @@ import { SessionService } from './session/session.service';
 import { Session } from './session/session.entity';
 import { Event } from './event/event.entity';
 import { SirupController } from './sirup/sirup.controller';
+import { LogsService } from '@thefirstspine/logs-nest';
 
 @Module({})
 export class AppModule {
@@ -34,7 +34,7 @@ export class AppModule {
       IndexController,
       SirupController],
       providers: [
-        {provide: LogService, useValue: new LogService('solid-pancake')},
+        LogsService,
         ApiService,
         EventService,
         SessionService,

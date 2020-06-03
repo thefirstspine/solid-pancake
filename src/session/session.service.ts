@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Session } from './session.entity';
-import { Repository, InsertResult } from 'typeorm';
-import { LogService } from '../@shared/log-shared/log.service';
+import { Repository } from 'typeorm';
 import uniqid = require('uniqid');
+import { LogsService } from '@thefirstspine/logs-nest';
 
 @Injectable()
 export class SessionService {
 
   constructor(
-    private readonly logService: LogService,
+    private readonly logsService: LogsService,
     @InjectRepository(Session)
     private readonly sessionRepository: Repository<Session>,
   ) {}
@@ -33,7 +33,7 @@ export class SessionService {
       return this.sessionRepository.findOne({session_id: sessionId});
     } catch (e) {
       // Log error before returning something
-      this.logService.error(e.message, {
+      this.logsService.error(e.message, {
         message: e.message,
         name: e.name,
         stack: e.stack,

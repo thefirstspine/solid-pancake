@@ -2,13 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Event } from './event.entity';
 import { Repository, InsertResult } from 'typeorm';
-import { LogService } from '../@shared/log-shared/log.service';
+import { LogsService } from '@thefirstspine/logs-nest';
 
 @Injectable()
 export class EventService {
 
   constructor(
-    private readonly logService: LogService,
+    private readonly logsService: LogsService,
     @InjectRepository(Event)
     private readonly eventRepository: Repository<Event>,
   ) {}
@@ -30,7 +30,7 @@ export class EventService {
       return this.eventRepository.findOne({event_id: result.identifiers[0].event_id});
     } catch (e) {
       // Log error before returning something
-      this.logService.error(e.message, {
+      this.logsService.error(e.message, {
         message: e.message,
         name: e.name,
         stack: e.stack,
