@@ -42,4 +42,16 @@ export class SessionService {
     }
   }
 
+  async request(offset: number, limit: number, filters: {[key: string]: any}) {
+    return await this.sessionRepository.find({
+      where: filters,
+      take: limit,
+      skip: offset,
+      relations: ['events'],
+      order: {
+        created_at: 'DESC',
+      },
+    });
+  }
+
 }

@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Event } from './event.entity';
 import { Repository, InsertResult } from 'typeorm';
 import { LogsService } from '@thefirstspine/logs-nest';
+import { Session } from 'src/session/session.entity';
 
 @Injectable()
 export class EventService {
@@ -37,6 +38,17 @@ export class EventService {
       });
       return null;
     }
+  }
+
+  async request(offset: number, limit: number, filters: {[key: string]: any}) {
+    return await this.eventRepository.find({
+      where: filters,
+      take: limit,
+      skip: offset,
+      order: {
+        created_at: 'DESC',
+      },
+    });
   }
 
 }

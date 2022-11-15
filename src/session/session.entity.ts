@@ -21,7 +21,7 @@ export class Session {
   @Column()
   created_at: Date;
 
-  @OneToMany(type => Event, event => event.session_id, {cascade: true})
+  @OneToMany(() => Event, event => event.session_id)
   events: Event[];
 
   @BeforeInsert()
