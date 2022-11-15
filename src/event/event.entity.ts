@@ -31,4 +31,7 @@ export class Event {
   beforeInsert() {
     this.created_at = new Date();
   }
+
+  @ManyToOne(() => Session, session => session.session_id)
+  session: Session;
 }

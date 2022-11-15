@@ -18,4 +18,13 @@ export class ApiService {
     return this.eventService.addEvent(sessionId, event, category, action, label);
   }
 
+  public requestStats(type: string, offset: number, limit: number, filters?: {[key: string]: any}) {
+    if (type === 'session') {
+      return this.sessionService.request(offset, limit, filters);
+    }
+    if (type === 'event') {
+      return this.eventService.request(offset, limit, filters);
+    }
+  }
+
 }

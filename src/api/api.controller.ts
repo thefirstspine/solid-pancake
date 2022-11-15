@@ -4,6 +4,7 @@ import { CreateSessionDto } from './create-session.dto';
 import { Session } from '../session/session.entity';
 import { AddEventDto } from './add-event.dto';
 import { Event } from '../event/event.entity';
+import { RequestStatsDto } from './request-stats.dto';
 
 @Controller('api')
 export class ApiController {
@@ -32,6 +33,16 @@ export class ApiController {
       addEventDto.label ? addEventDto.label : '',
     );
     return !!event ? 'ok' : 'er';
+  }
+
+  @Post('request-stats')
+  async requestStats(@Body() requestStatsDto: RequestStatsDto) {
+    return await this.apiService.requestStats(
+      requestStatsDto.type,
+      requestStatsDto.offset,
+      requestStatsDto.limit,
+      requestStatsDto.filters,
+    );
   }
 
 }
