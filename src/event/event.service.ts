@@ -28,7 +28,7 @@ export class EventService {
       const result: InsertResult = await this.eventRepository.insert(event);
 
       // Return the entity
-      return this.eventRepository.findOne({event_id: result.identifiers[0].event_id});
+      return this.eventRepository.findOne({where: {event_id: result.identifiers[0].event_id}});
     } catch (e) {
       // Log error before returning something
       this.logsService.error(e.message, {

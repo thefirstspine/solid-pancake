@@ -30,7 +30,7 @@ export class SessionService {
       await this.sessionRepository.insert(session);
 
       // Return the entity
-      return this.sessionRepository.findOne({session_id: sessionId});
+      return this.sessionRepository.findOne({where: {session_id: sessionId}});
     } catch (e) {
       // Log error before returning something
       this.logsService.error(e.message, {
