@@ -2,7 +2,13 @@
 import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, ManyToOne } from 'typeorm';
 import { Session } from '../session/session.entity';
 
-@Entity()
+/*
+TODO: Remove {synchronize: false}
+TypeORM is throwing an exception on runtime "the constraint already exists"
+No fix for now but deactivating the sync for now
+Source: https://github.com/typeorm/typeorm/issues/7738
+*/
+@Entity({synchronize: false})
 export class Event {
 
   @PrimaryGeneratedColumn()
