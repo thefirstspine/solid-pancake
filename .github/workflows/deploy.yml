@@ -1,0 +1,29 @@
+name: Deploy app
+on:
+  release:
+    types:
+      - published
+  workflow_dispatch:
+jobs:
+  deploy:
+    name: Checkout Ansible
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          repository: git@github.com:thefirstspine/ansible.git
+      - name: Get inventory
+        run: |
+          rm -rf volume/conf
+          rm -rf volume/keys
+          git clone git@github.com:thefirstspine/ansible-secrets.git tmp
+          mv tmp/conf volume/conf
+          mv tmp/keys volume/keys
+      - name: Build Docker image
+        run: |
+          docker build -t thefirstspine/ansible .
+      - name: Build Docker image
+        run: |
+          docker run --rm -v ./volume:/volume thefirstspine/ansible ansible-playbook -i /volume/conf/inventory.yaml /volume/playbooks/deploy-solid-pancake.yaml
