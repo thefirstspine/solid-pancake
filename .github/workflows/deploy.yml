@@ -20,6 +20,7 @@ jobs:
           fetch-depth: 0
           repository: thefirstspine/ansible-secrets
           path: tmp
+          token: ${{ secrets.ACCESS_TOKEN }}
       - name: Get inventory
         run: |
           rm -rf volume/conf
