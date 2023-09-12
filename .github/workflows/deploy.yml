@@ -14,11 +14,16 @@ jobs:
         with:
           fetch-depth: 0
           repository: thefirstspine/ansible
+      - name: Get config
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          repository: thefirstspine/ansible-secrets
+          path: tmp
       - name: Get inventory
         run: |
           rm -rf volume/conf
           rm -rf volume/keys
-          git clone git@github.com:thefirstspine/ansible-secrets.git tmp
           mv tmp/conf volume/conf
           mv tmp/keys volume/keys
       - name: Build Docker image
