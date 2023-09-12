@@ -30,6 +30,6 @@ jobs:
       - name: Build Docker image
         run: |
           docker build -t thefirstspine/ansible .
-      - name: Build Docker image
+      - name: Run thefirstspine/ansible image
         run: |
           docker run --rm -v ./volume:/volume thefirstspine/ansible ansible-playbook -i /volume/conf/inventory.yaml /volume/playbooks/deploy-solid-pancake.yaml
