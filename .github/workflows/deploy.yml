@@ -6,14 +6,14 @@ on:
   workflow_dispatch:
 jobs:
   deploy:
-    name: Checkout Ansible
+    name: Deploy app
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Checkout Ansible
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          repository: git@github.com:thefirstspine/ansible.git
+          repository: thefirstspine/ansible
       - name: Get inventory
         run: |
           rm -rf volume/conf
