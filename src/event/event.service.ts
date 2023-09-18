@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Event } from './event.entity';
 import { Repository, InsertResult } from 'typeorm';
 import { LogsService } from '@thefirstspine/logs-nest';
-import { Session } from 'src/session/session.entity';
 
 @Injectable()
 export class EventService {

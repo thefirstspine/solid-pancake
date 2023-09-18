@@ -5,9 +5,22 @@ on:
       - published
   workflow_dispatch:
 jobs:
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Install
+        run: npm install
+      - name: Launch tests
+        run: npm run test
   deploy:
     name: Deploy app
     runs-on: ubuntu-latest
+    needs: [tests]
     steps:
       - name: Checkout Ansible
         uses: actions/checkout@v3

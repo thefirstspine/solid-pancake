@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { SessionService } from 'src/session/session.service';
-import { EventService } from 'src/event/event.service';
+import { SessionService } from '../session/session.service';
+import { EventService } from '../event/event.service';
 
 @Injectable()
 export class ApiService {
