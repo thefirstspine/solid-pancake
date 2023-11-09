@@ -18,16 +18,16 @@ export class Event {
   @ManyToOne(type => Session, session => session.session_id)
   session_id: string;
 
-  @Column({length: 250})
+  @Column({length: 512})
   category: string;
 
-  @Column({length: 250})
+  @Column({length: 512})
   event: string;
 
-  @Column({length: 250, default: ''})
+  @Column({length: 512, default: ''})
   action: string;
 
-  @Column({length: 250, default: ''})
+  @Column({length: 512, default: ''})
   label: string;
 
   @Column()
