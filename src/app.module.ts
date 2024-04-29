@@ -1,4 +1,4 @@
-import { Module, DynamicModule, NestModule, MiddlewareConsumer } from '@nestjs/common';
+import { Module, DynamicModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApiController } from './api/api.controller';
 import { IndexController } from './index/index.controller';
@@ -8,10 +8,10 @@ import { SessionService } from './session/session.service';
 import { Session } from './session/session.entity';
 import { Event } from './event/event.entity';
 import { SirupController } from './sirup/sirup.controller';
-import { LogsService, RequestsLoggerMiddleware } from '@thefirstspine/logs-nest';
+import { LogsService } from '@thefirstspine/logs-nest';
 
 @Module({})
-export class AppModule implements NestModule {
+export class AppModule {
 
   public static register(): DynamicModule {
     return {
@@ -30,21 +30,17 @@ export class AppModule implements NestModule {
         }),
       ],
       controllers: [
-      ApiController,
-      IndexController,
-      SirupController],
+        ApiController,
+        IndexController,
+        SirupController
+      ],
       providers: [
         LogsService,
         ApiService,
         EventService,
         SessionService,
-        RequestsLoggerMiddleware,
       ],
     };
-  }
-
-  configure(consumer: MiddlewareConsumer): void {
-    consumer.apply(RequestsLoggerMiddleware).forRoutes('*');
   }
 
 }
