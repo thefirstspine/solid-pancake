@@ -1,7 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ErrorFilter } from './error.filter';
-import { LogsService } from '@thefirstspine/logs-nest';
+import { LogsService, ErrorFilter } from '@thefirstspine/logs-nest';
 
 async function bootstrap() {
   // Load dotenv config
