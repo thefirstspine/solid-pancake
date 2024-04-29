@@ -30,9 +30,10 @@ export class AppModule {
         }),
       ],
       controllers: [
-      ApiController,
-      IndexController,
-      SirupController],
+        ApiController,
+        IndexController,
+        SirupController
+      ],
       providers: [
         LogsService,
         ApiService,
