@@ -38,6 +38,7 @@ export class AppModule implements NestModule {
         ApiService,
         EventService,
         SessionService,
+        RequestsLoggerMiddleware,
       ],
     };
   }
