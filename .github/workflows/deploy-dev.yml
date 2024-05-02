@@ -41,8 +41,10 @@ jobs:
           mv tmp/conf volume/conf
           mv tmp/keys volume/keys
       - name: Build Docker image
-        run: |
-          docker build -t thefirstspine/ansible .
+        uses: whoan/docker-build-with-cache-action@master
+        with:
+          image_name: thefirstspine/ansible
+          context: .
       - name: Run thefirstspine/ansible image
         run: |
           docker run --rm -v ./volume:/volume -e BRANCH=next thefirstspine/ansible ansible-playbook -i /volume/conf/inventory.yaml /volume/playbooks/deploy-solid-pancake.yaml
