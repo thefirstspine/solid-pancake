@@ -42,7 +42,7 @@ jobs:
           mv tmp/keys volume/keys
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      - name: Build and push
+      - name: Build thefirstspine/ansible image
         uses: docker/build-push-action@v5
         with:
           context: .
