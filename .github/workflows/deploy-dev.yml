@@ -43,7 +43,7 @@ jobs:
       - name: Build Docker image
         uses: whoan/docker-build-with-cache-action@master
         with:
-          image_name: thefirstspine/ansible
+          image_tag: thefirstspine/ansible
           context: .
       - name: Run thefirstspine/ansible image
         run: |
